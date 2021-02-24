@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class Student {
     private String name;
     private int groupNumber;
-    int []marks = new int[5];
+    private int []marks = new int[5];
     public Student(String name, int groupNumber, int[] marks) {
         this.name = name;
         this.groupNumber = groupNumber;
