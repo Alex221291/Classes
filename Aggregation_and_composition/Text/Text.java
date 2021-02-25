@@ -1,18 +1,93 @@
 package aggregation.Text;
 //1. Создать объект класса Текст, используя классы Предложение, Слово. Методы: дополнить текст, вывести на
 //консоль текст, заголовок текста.
-public class Main {
-    public static void main(String[] args) {
-        Sentence s1 = new Sentence(new Word[]{Word.of("Healthy"), Word.of("and"), Word.of("happy"), Word.of("family")});
-        Sentence s2 = new Sentence(new Word[]{Word.of("Become"), Word.of("a"), Word.of("java"), Word.of("developer"), Word.of("this"), Word.of("year")});
-        Sentence s3 = new Sentence(new Word[]{Word.of("Complete"), Word.of("step"), Word.of("one"), Word.of("and"), Word.of("step"), Word.of("two")});
+import java.util.Arrays;
 
-        Text text = new Text("My plans");
+public class Text {
+    private  String title;
+    private Sentence[] sentences;
 
-        text.complementText(s1);
-        text.complementText(s2);
-        text.complementText(s3);
+    public Text(String title) {
+        this.title = title;
+        this.sentences = new Sentence[0];
+    }
 
-        text.printText();
+    public Text complementText(Sentence newSentence) {
+
+        sentences = Arrays.copyOf(sentences, sentences.length + 1);
+
+        sentences[sentences.length - 1] = newSentence;
+
+        return this;
+    }
+
+
+    public void printText() {
+
+        System.out.println(title);
+
+        for (Sentence s : sentences) {
+            s.print();
+        }
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Sentence[] getSentences() {
+        return sentences;
+    }
+
+    public void setSentences(Sentence[] sentences) {
+        this.sentences = sentences;
+    }
+}
+
+class Sentence{
+    private Word[] words;
+
+    public Sentence(Word[] words) {
+        this.words = words;
+    }
+
+    public void print() {
+        for (Word w : words) {
+            System.out.print(w.getWord() + " ");
+        }
+        System.out.print(".\n");
+    }
+
+    public Word[] getWords() {
+        return words;
+    }
+
+    public void setWords(Word[] words) {
+        this.words = words;
+    }
+}
+
+class Word {
+    private String word;
+
+    public Word(String word) {
+        this.word = word;
+    }
+
+    //метод для построения слов из строки
+    public static Word of(String word){
+        return new Word(word);
+    }
+
+    public String getWord() {
+        return word;
+    }
+
+    public void setWord(String word) {
+        this.word = word;
     }
 }
